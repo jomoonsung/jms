@@ -1,0 +1,72 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	 			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>글쓰기</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/styles.css" rel="stylesheet" />
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  </style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script th:src="@{/js/board.js}"></script>
+</head>
+<body class="container">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container px-5">
+			<a class="navbar-brand" th:href="@{/}">jms게임커뮤니티</a>
+			 <ul class="navbar-nav">
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/buyboardList}">팝니다</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/sellboardList}">삽니다</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/newsboardList}">자유게시판</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/noticeboardList}">공지사항</a></li>
+	         </ul>
+		</div>
+	</nav>
+<div>
+	<div class="row" style="margin-top: 100px">
+		<div class="col-sm-12">
+	      <h2>글쓰기</h2>
+	      <hr>
+	        <form action="/board/insertboard" method = "POST" enctype="multipart/form-data">
+	        	분류:<select  name="boardType" id="boardType" th:value="${board.boardType}">
+	        		<option th:selected="${board.boardType}=='팝니다'">팝니다</option>
+	        		<option th:selected="${board.boardType}=='삽니다'">삽니다</option>
+	        		<option th:selected="${board.boardType}=='자유게시판'">자유게시판</option>
+	        		<option th:selected="${board.boardType}=='공지사항'" sec:authorize="hasRole('ROLE_ADMIN')">공지사항</option>
+	        	</select>
+				<div class="form-group">
+				  <label for="username">작성자:</label>
+					<span sec:authentication="principal.username"/>
+				</div>
+				<div class="form-group">
+				  <label for="title">제목:</label>
+				  <input type="text" class="form-control" id="title" name = "title">
+				</div>
+			    <div class="form-group">
+			      <input type="file" class="form-control-file border" name="file" id="file">
+			    </div>
+			    <div class="form-group">
+				  <label for="comment">내용:</label>
+				  <textarea class="form-control" rows="5" id="content" name = "content" style="resize: none"></textarea>
+				</div>
+				<div style="float: right;">
+			    <button type="submit" class="btn btn-primary">글쓰기</button>
+			    </div>
+			  </form>
+		</div>
+	</div>
+</div>
+ <footer class="py-0 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">사이트주소 www.jms.com
+            <br>
+            이메일 anstndwkd@naver.com</p></div>
+        </footer> 
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+	
+	
+	 
+	 	
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container px-5">
+			<a class="navbar-brand">받은쪽지</a>
+			<ul class="navbar-nav">
+	          <li class="nav-item"><a class="nav-link" th:href="@{/note/noteList}">받은쪽지</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/note/sentnote}">보낸쪽지</a></li>
+	          <li class="nav-item"><a class="nav-link" th:href="@{/note/savenote}">쪽지보관함</a></li>
+	       </ul>
+		</div>
+	</nav>
+<table class="table">
+    <tr>
+        <th>제목</th>
+        <th>보낸이</th>
+        <th>날짜</th>
+    </tr>
+    <tr th:each="board: ${boardList}">
+        <td th:text="${board.id}"></td>
+        <td th:text="${board.writer.name}"></td>
+        <td th:text="${board.title}"></td>
+    </tr>
+</table>
+	<table width="550" border="0" cellspacing="0" cellpadding="0" align="center" height="34">
+				<tr valign="bottom" align="center">
+					<td>
+						<input type="button" value="선택쪽지 삭제" onclick="mul_check();" style="font-size:12px;width:100px;height:25px;border:1px solid #000000;">
+						<input type="button" value="새쪽지 작성" onclick="location.href='./write.asp?msgchk1=1';" style="font-size:12px;width:100px;height:25px;border:1px solid #000000;">
+						
+						<input type="button" value="보관함 이동" onclick="save_move();" style="font-size:12px;width:100px;height:25px;border:1px solid #000000;">
+						
+					</td>
+				</tr>
+			</table>
+
+<nav style="text-align: center;">
+    <ul class="pagination">
+        <li class="disabled">
+            <a href="#" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>	
+
+ 	<footer class="py-0 bg-dark ">
+		<div class="container px-4 px-lg-5">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2022</p>
+		</div>
+	</footer>  
+
+</body>
+</html>

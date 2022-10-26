@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+	
+	
+	 
+	 	
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container px-5">
+			<a class="navbar-brand" th:href="@{/}">jms게임커뮤니티</a>
+			 <ul class="navbar-nav">
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/buyboardList?boardType=팝니다}">팝니다</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/sellboardList?boardType=삽니다}">삽니다</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/newsboardList?boardType=자유게시판}">자유게시판</a></li>
+	             <li class="nav-item"><a class="nav-link" th:href="@{/board/noticeboardList?boardType=공지사항}">공지사항</a></li>
+	         </ul>
+		</div>
+	</nav>
+		<form name="search-form" method="GET" th:action="@{/board/search?boardType=삽니다}">
+		<input type="hidden" name="boardType" th:value=${board.boardType}>
+		<div style="float: right">
+	 	<select name="type">
+				<option value="title" >제목+내용</option>
+				<option value="username" >작성자</option>	
+			</select>
+		<input type="text" name="keyword" value="" size="10" maxlength="20">
+		<input type="submit" value="검색" >
+		</div>
+	</form>	
+<div class="container">
+    <h2>삽니다</h2>
+</div>
+
+<table class="table">
+    <tr>
+        <th>글 번호</th>
+        <th>글 제목</th>
+        <th>작성자</th>
+        <th>작성일자</th>
+        <th>조회수</th>
+    </tr>
+     <tr th:each="board, state : ${boardList}">
+        <td th:text="${board.boardnum}"></td>
+        <td><a th:href="@{/board/boardDetail(boardnum=${board.boardnum})}" th:text="${board.title}" style="text-decoration: none"></a></td>
+		<td th:text="${board.user.username}"></td>
+        <td th:text="${#dates.format(board.created_date, 'yyyy-MM-dd')}"></td>
+		<td th:text="${board.count}" ></td>
+    </tr>
+</table>
+<a th:href="@{/board/insertBoard}"><button type="submit" style="float: right;"class="btn btn-primary">글쓰기</button></a>
+<nav style="text-align: center;">
+    <ul class="pagination">
+  <li class="page-item" th:classappend="${startPage == pageList.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/board/sellboardList(page=${pageList.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${num == pageList.pageable.pageNumber + 1} ? 'active'" th:each="num : ${#numbers.sequence(startPage, endPage)}">
+                <a class="page-link" th:href="@{/board/sellboardList(page=${num-1})}" th:text="${num}">1</a></li>
+ 
+            <li class="page-item" th:classappend="${endPage == pageList.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/board/sellboardList(page=${pageList.pageable.pageNumber + 1})}">Next</a>
+            </li>
+    </ul>
+</nav>	
+ <footer class="py-0 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">사이트주소 www.jms.com
+            <br>
+            이메일 anstndwkd@naver.com</p></div>
+        </footer>
+</body>
+</html>

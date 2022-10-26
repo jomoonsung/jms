@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>로그인</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel='stylesheet'
+	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel='stylesheet'
+	href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+ <link th:href="@{/css/login.css}" rel="stylesheet" />
+
+	<script src="/js/user.js"></script>
+</head>
+<body>
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Log In</h4>
+											
+										<form method="POST" th:action=@{/system/login_proc}>	
+											<div class="form-group">
+												<input type="text" name="username" class="form-style"
+													placeholder="id입력해주세요" id="username" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" name="userpassword" class="form-style"
+													placeholder="비밀번호를 입력해주세요" id="userpassword" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<input type="submit" value="로그인" class="btn mt-4" onclick="login_check()">
+											</form>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

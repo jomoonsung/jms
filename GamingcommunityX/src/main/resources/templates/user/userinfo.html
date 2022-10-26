@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>개인정보</title>
+<link href="/css/styles.css" rel="stylesheet" />
+<style type="text/css">
+	table{
+		margin-left: 15%;
+		margin-top: 20%;
+	}
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>       
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container px-5" style="margin-right: 300px">
+			<a class="navbar-brand" th:href="@{/}">디아블로커뮤니티</a>
+		</div>
+	</nav>
+	
+<form th:action="@{/user/updateuser}" method="post"   sec:authorize="isAuthenticated()">
+	<input type="hidden"  id="userid" name="userid" th:value="${user.getUserid()}">
+	<div class="container">
+	    <div class="row">
+        	<div class="col-sm-12">
+                <div class="col-sm-9">
+                    <table class="table table-striped">
+                     <thead>
+                     	<th>회원수정</th>
+                     </thead>
+                      <tr>
+                        <td>아이디</td>
+                        <td sec:authentication="principal.username"><input type="text" id="username" value="username"></td>
+                      </tr>
+                      <tr>
+                        <td>이메일</td>
+                        <td><input type="email" name="email" id="email" th:value="${user.getEmail()}" style="width: 250px"></td>
+                      </tr>
+                 	
+                      <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" name="userpassword" id="userpassword"></td>
+                      </tr>
+                         <tr>
+                        <td>포인트</td>
+                        <td th:text="${user.getPoint_amount}"></td>
+                      </tr>	
+                    <tr>
+                     <td class="text-center" colspan="2">
+					<button  type="submit" id="btn-update" class="btn btn-primary">회원수정</button>
+					
+                   </td>    
+                    </tr> 
+                    </table>
+                </div>
+        </div> <!-- col-sm-12 -->
+    </div><!-- row -->
+</div> <!-- container end-->
+     </form>
+     <div style="margin-right: 150px">
+       <a th:href="@{/user/deleteuser}"><button class="btn btn-primary" type="submit" style="float: right;">회원탈퇴</button></a>
+       <a href="/"><button class="btn btn-primary" type="reset"  style="float: right; margin-right: 5px"> 돌아가기</button></a>
+      </div> 
+	 <footer class="py-0 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">사이트주소 www.jms.com
+            <br>
+            이메일 anstndwkd@naver.com</p></div>
+        </footer>
+
+</body>
+</html>
