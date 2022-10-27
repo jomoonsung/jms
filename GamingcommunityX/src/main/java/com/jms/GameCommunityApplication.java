@@ -9,7 +9,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class GameCommunityApplication  {
 		
 	
-	
 	public static void main(String[] args) {
 		SpringApplication.run(GameCommunityApplication.class, args);
 	}
