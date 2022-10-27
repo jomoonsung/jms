@@ -4,6 +4,7 @@ package com.jms.controller;
 
 
 import javax.transaction.Transactional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jms.common.MessageDto;
-import com.jms.domain.Grade;
 import com.jms.domain.Mail;
 import com.jms.domain.Role;
 import com.jms.domain.User_1;
@@ -57,7 +57,7 @@ public class UserController {
 	
 	//회원가입
 	@PostMapping("/userjoin")
-	public String userjoin(@Valid @ModelAttribute("user") User_1 user , BindingResult br,Model model,Grade grade) {
+	public String userjoin(@Valid @ModelAttribute("user") User_1 user , BindingResult br,Model model) {
 			
 			//아이디 중복 처리
 			if(br.hasErrors()) {

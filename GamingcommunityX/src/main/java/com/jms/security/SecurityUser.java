@@ -1,9 +1,9 @@
 package com.jms.security;
 
 import org.springframework.security.core.authority.AuthorityUtils;
+
 import org.springframework.security.core.userdetails.User;
 
-import com.jms.domain.Grade;
 import com.jms.domain.User_1;
 
 public class SecurityUser extends User {
